@@ -9,10 +9,10 @@
 
     <title>{{ env('APP_NAME') }}</title>
   </head>
-  <body>
+  <body class="bg-light">
     @include('includes.navbar')
 
-    <div class="container">
+    <div class="container py-4">
       @yield('content')
     </div>
     
