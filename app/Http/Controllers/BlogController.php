@@ -12,6 +12,13 @@ class BlogController extends Controller
       $active = 'blog';
       $blogs = Blog::latest()->get();
 
-      return view('blog', compact('active', 'blogs'));
+      return view('blogs.index', compact('active', 'blogs'));
+    }
+
+    public function detail($slug)
+    {
+      $blog = Blog::whereSlug($slug)->firstOrFail();
+
+      return view('blogs.detail', compact('blog'));
     }
 }

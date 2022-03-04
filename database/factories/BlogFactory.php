@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,12 +17,16 @@ class BlogFactory extends Factory
      */
     public function definition()
     {
+
+        // random id from user where role user
+        $user = User::isUser()->inRandomOrder()->first();
+
         return [
             'slug' => $this->faker->slug,
             'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
+            'body' => $this->faker->paragraph,
             'image' => $this->faker->imageUrl,
-            'author' => $this->faker->name,
+            'user_id' => $user->id,
             'published' => $this->faker->boolean,
         ];
     }

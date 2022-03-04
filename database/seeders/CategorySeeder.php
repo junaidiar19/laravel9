@@ -14,18 +14,27 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $attr = [
-            [
-                'slug' => 'laravel',
-                'name' => 'Laravel',
-            ],
-            [
-                'slug' => 'node-js',
-                'name' => 'Node JS',
-            ]
-        ];
+        $categories = ['Career', 'Self Development', 'Work', 'Leadership', 'Health', 'Family', 'Relationships', 'Finance', 'Hobbies', 'Travel', 'Education', 'Spirituality'];
 
-        \App\Models\Category::create($attr); // insert multiple rows
+        foreach($categories as $item) {
+            \App\Models\Category::create([
+                'slug' => str()->slug($item),
+                'name' => $item
+            ]);
+        }
+
+        // $attr = [
+        //     [
+        //         'slug' => 'laravel',
+        //         'name' => 'Laravel',
+        //     ],
+        //     [
+        //         'slug' => 'node-js',
+        //         'name' => 'Node JS',
+        //     ]
+        // ];
+
+        // \App\Models\Category::create($attr); // insert multiple rows
         // \App\Models\Category::create($attr); // create one row
     }
 }
