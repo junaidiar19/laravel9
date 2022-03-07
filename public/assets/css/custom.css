@@ -1,3 +1,11 @@
 a {
     text-decoration: none;
 }
+
+.fw-semibold {
+    font-weight: 500;
+}
+
+.text-sm {
+    font-size: small;
+}

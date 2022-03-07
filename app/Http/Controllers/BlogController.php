@@ -11,21 +11,24 @@ class BlogController extends Controller
     public function index()
     {
       $active = 'blog';
-      $blogs = Blog::latest()->get();
+      $blogs = Blog::latest('comments_count')->get();
 
       return view('blogs.index', compact('active', 'blogs'));
     }
 
     public function detail($slug)
     {
-      $blog = Blog::whereSlug($slug)->firstOrFail();
+      $blog = Blog::withCount('comments')->whereSlug($slug)->firstOrFail();
+      $comments = $blog->comments()->with('user')->paginate(2);
 
-      return view('blogs.detail', compact('blog'));
+      // return response()->json($comments);
+
+      return view('blogs.detail', compact('blog', 'comments'));
     }
 
     public function category($slug)
     {
-      $category = Category::whereSlug($slug)->firstOrFail();
+      $category = Category::withCount('blogs')->whereSlug($slug)->firstOrFail();
       $blogs = $category->blogs()->latest()->get();
 
       return view('blogs.category', compact('category', 'blogs'));

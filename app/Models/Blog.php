@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
+    protected $with = ['categories', 'author'];
+    protected $withCount = ['comments'];
     
     public function author()
     {
@@ -17,5 +19,10 @@ class Blog extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

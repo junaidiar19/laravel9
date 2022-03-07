@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<h6 class="mb-4">Kategori: {{ $category->name }}</h6>
+<h6 class="mb-4">Kategori: {{ $category->name }} | Total Blog: {{ $category->blogs_count }}</h6>
 
 <div class="row">
   @foreach ($blogs as $blog)

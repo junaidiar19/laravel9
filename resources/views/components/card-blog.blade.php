@@ -11,5 +11,6 @@
       </a>
     @endforeach
     <p class="text-muted">{{ str()->limit($blog->body, 40) }}</p>
+    <p>Komentar ({{ $blog->comments_count }})</p>
   </div>
 </div>
