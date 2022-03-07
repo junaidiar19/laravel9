@@ -9,4 +9,9 @@ class Category extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function blogs()
+    {
+        return $this->belongsToMany(Blog::class);
+    }
 }

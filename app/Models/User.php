@@ -44,12 +44,12 @@ class User extends Authenticatable
     ];
 
     public function person() {
-        return $this->hasOne(Person::class);
+        return $this->hasOne(Person::class)->withDefault();
     }
 
-    public function blog()
+    public function blogs()
     {
-        return $this->hasMany(Blog::class);
+        return $this->hasMany(Blog::class); // 1 user itu bisa memiliki lebih dari 1 blog
     }
 
     // scope role is user

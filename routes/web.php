@@ -20,6 +20,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog-detail/{slug}', [BlogController::class, 'detail'])->name('blog.detail');
+Route::get('/blog-category/{slug}', [BlogController::class, 'category'])->name('blog.category');
 
 Route::get('/kontak', function () {
     return view('contact');
