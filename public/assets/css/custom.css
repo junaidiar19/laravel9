@@ -9,3 +9,20 @@ a {
 .text-sm {
     font-size: small;
 }
+
+body {
+    background-color: #f6f8fd;
+}
+
+.table th {
+    font-weight: 500;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 4px;
+}

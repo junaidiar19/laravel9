@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
@@ -29,3 +30,7 @@ Route::get('/kontak', function () {
 Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::get('/user/{id}', [UserController::class, 'detail'])->name('users.detail');
 
+// Route Books
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
+Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
+Route::post('/books/store', [BookController::class, 'store'])->name('books.store');

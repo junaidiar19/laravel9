@@ -17,12 +17,8 @@
                 <li class="nav-item">
                     <a class="nav-link {{ (request()->routeIs('users')) ? 'active' : '' }}" href="{{ route('users') }}">Users</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="#">Action 1</a>
-                        <a class="dropdown-item" href="#">Action 2</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->routeIs('books')) ? 'active' : '' }}" href="{{ route('books.index') }}">Buku</a>
                 </li>
             </ul>
         </div>
