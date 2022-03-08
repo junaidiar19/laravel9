@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use com_exception;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -33,7 +32,16 @@ class BookController extends Controller
             'price' => 'required|numeric',
             // 'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required|numeric',
-            'published' => 'required|boolean',
+            'published' => 'boolean',
+        ], [
+            'required' => ':attribute Wajib diisi',
+            'numeric' => ':attribute Wajib Berupa Angka',
+        ], [
+            'Kode' => 'Kode',
+            'title' => 'Judul',
+            'qty' => 'Jumlah',
+            'price' => 'Harga',
+            'category_id' => 'Kategori',
         ]);
 
         // dd($validate);
