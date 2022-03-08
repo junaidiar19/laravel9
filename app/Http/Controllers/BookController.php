@@ -33,10 +33,7 @@ class BookController extends Controller
             // 'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required|numeric',
             'published' => 'boolean',
-        ], [
-            'required' => ':attribute Wajib diisi',
-            'numeric' => ':attribute Wajib Berupa Angka',
-        ], [
+        ], [], [
             'Kode' => 'Kode',
             'title' => 'Judul',
             'qty' => 'Jumlah',
