@@ -44,7 +44,7 @@
                         @method('DELETE')
                         <button class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
                       </form>
-                      <a href="" class="btn btn-success">Edit</a>
+                      <a href="{{ route('books.edit', $book->id) }}" class="btn btn-success">Edit</a>
                     </td>
                   </tr>
               @empty

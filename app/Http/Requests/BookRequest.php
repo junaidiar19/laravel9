@@ -23,8 +23,14 @@ class BookRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->book) {
+            $kode = "required|unique:books,kode,{$this->book->id}";
+        } else {
+            $kode = "required|unique:books,kode";
+        }
+
         return [
-            'kode' => 'required|unique:books',
+            'kode' => $kode,
             'title' => 'required',
             'qty' => 'required|numeric',
             'price' => 'required|numeric',

@@ -6,12 +6,13 @@
     <a href="{{ route('books.index') }}">Kembali</a>
     <div class="card mt-3">
       <div class="card-header text-center">
-        <h6>Tambah Buku</h6>
+        <h6>Edit Buku</h6>
       </div>
       <div class="card-body">
         <x-alert />
-        <form action="{{ route('books.store') }}" method="POST">
+        <form action="{{ route('books.update', $book->id) }}" method="POST">
           @csrf
+          @method('PUT')
           @include('books._form')
         </form>
       </div>

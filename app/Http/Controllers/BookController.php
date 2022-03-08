@@ -41,4 +41,21 @@ class BookController extends Controller
         session()->flash('success', 'Book has been deleted');
         return redirect()->back();
     }
+
+    public function edit(Book $book)
+    {
+        $categories = Category::all();
+
+        return view('books.edit', compact('book', 'categories'));
+    }
+
+    public function update(BookRequest $request, Book $book)
+    {
+        // Update the book...
+        $book->update($request->all());
+
+        // Redirect to the book's show page...
+        session()->flash('success', 'Book has been updated');
+        return redirect()->back();
+    }
 }
