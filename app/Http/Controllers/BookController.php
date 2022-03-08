@@ -42,7 +42,7 @@ class BookController extends Controller
         return redirect()->back();
     }
 
-    public function edit(Book $book)
+    public function edit(Book $book) // route model binding
     {
         $categories = Category::all();
 
