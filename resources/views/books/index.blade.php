@@ -11,6 +11,7 @@
         </div>
       </div>
       <div class="card-body">
+        <x-alert />
         <div class="table-responsive">
           <table class="table table-striped table-bordered">
             <thead>
@@ -38,7 +39,11 @@
                       <input type="checkbox" {{ ($book->published) ? 'checked' : '' }}>
                     </td>
                     <td>
-                      <button class="btn btn-danger">Hapus</button>
+                      <form action="{{ route('books.delete', $book->id) }}" class="d-inline" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
+                      </form>
                       <a href="" class="btn btn-success">Edit</a>
                     </td>
                   </tr>

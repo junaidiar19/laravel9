@@ -33,4 +33,12 @@ class BookController extends Controller
         session()->flash('success', 'Book has been created');
         return redirect()->back();
     }
+
+    public function delete($id)
+    {
+        Book::destroy($id);
+
+        session()->flash('success', 'Book has been deleted');
+        return redirect()->back();
+    }
 }
