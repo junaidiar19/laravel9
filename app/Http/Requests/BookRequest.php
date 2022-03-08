@@ -30,7 +30,18 @@ class BookRequest extends FormRequest
             'price' => 'required|numeric',
             // 'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required|numeric',
-            'published' => 'required|boolean',
+            'published' => 'boolean',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'Kode' => 'Kode',
+            'title' => 'Judul',
+            'qty' => 'Jumlah',
+            'price' => 'Harga',
+            'category_id' => 'Kategori',
         ];
     }
 }

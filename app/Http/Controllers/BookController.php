@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookRequest;
 
 class BookController extends Controller
 {
@@ -22,27 +23,8 @@ class BookController extends Controller
         return view('books.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        // Validate the request...
-        $request->validate([
-            'kode' => 'required|unique:books',
-            'title' => 'required',
-            'qty' => 'required|numeric',
-            'price' => 'required|numeric',
-            // 'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category_id' => 'required|numeric',
-            'published' => 'boolean',
-        ], [], [
-            'Kode' => 'Kode',
-            'title' => 'Judul',
-            'qty' => 'Jumlah',
-            'price' => 'Harga',
-            'category_id' => 'Kategori',
-        ]);
-
-        // dd($validate);
-
         // Create a new book...
         $attr = $request->all();
         Book::create($attr);
