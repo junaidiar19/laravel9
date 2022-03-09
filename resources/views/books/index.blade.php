@@ -12,6 +12,22 @@
       </div>
       <div class="card-body">
         <x-alert />
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Pencarian...">
+          </div>
+          <div class="col-md-3">
+            <select name="category" class="form-control">
+              <option value="">-Semua Kategori-</option>
+              @foreach ($categories as $category)
+                  <option value="{{ $category->id }}">{{ $category->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-warning w-50">Cari</button>
+          </div>
+        </div>
         <div class="table-responsive">
           <table class="table table-striped table-bordered">
             <thead>
@@ -33,7 +49,7 @@
                     <td>{{ $book->kode }}</td>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->qty }}</td>
-                    <td>{{ $book->price }}</td>
+                    <td>{{ $book->getPrice }}</td>
                     <td>{{ $book->category->name }}</td>
                     <td>
                       <input type="checkbox" {{ ($book->published) ? 'checked' : '' }}>

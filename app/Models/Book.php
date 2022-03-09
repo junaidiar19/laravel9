@@ -15,4 +15,11 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    // Defining an Accessor
+    public function getGetPriceAttribute()
+    {
+        $price = $this->attributes['price'];
+        return ($price > 0) ? 'Rp. ' . number_format($price) : 'Free';
+    }
 }
