@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BooksController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -32,14 +33,17 @@ Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::get('/user/{id}', [UserController::class, 'detail'])->name('users.detail');
 
 // Route Books
-Route::controller(BookController::class)->group(function() {
-    Route::get('/books', 'index')->name('books.index');
-    Route::get('/books/create', 'create')->name('books.create');
-    Route::post('/books/store', 'store')->name('books.store');
-    Route::delete('/books/delete/{id}', 'delete')->name('books.delete');
-    Route::get('/books/edit/{book}', 'edit')->name('books.edit');
-    Route::put('/books/update/{book}', 'update')->name('books.update');
-});
+// Route::controller(BookController::class)->group(function() {
+//     Route::get('/books', 'index')->name('books.index');
+//     Route::get('/books/create', 'create')->name('books.create');
+//     Route::post('/books/store', 'store')->name('books.store');
+//     Route::delete('/books/delete/{id}', 'delete')->name('books.delete');
+//     Route::get('/books/edit/{book}', 'edit')->name('books.edit');
+//     Route::put('/books/update/{book}', 'update')->name('books.update');
+// });
+
+// Route Books Controller Resource
+Route::resource('books', BooksController::class);
 
 // Route Invokable
 Route::get('invokable', ExampleController::class);

@@ -52,7 +52,7 @@
   @enderror
 </div>
 <div class="d-flex align-items-center mb-3">
-  <input type="checkbox" name="published" id="published" class="me-2" value="1" {{ (old('published', @$book->published) == 1) ? 'checked' : '' }}>
+  <input type="checkbox" name="published" id="published" class="me-2" value="0" {{ (old('published', @$book->published) == 1) ? 'checked' : '' }}>
   <label for="published">Published</label>
 </div>
 <div class="d-grid">

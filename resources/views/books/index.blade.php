@@ -12,22 +12,24 @@
       </div>
       <div class="card-body">
         <x-alert />
-        <div class="row mb-3">
-          <div class="col-md-3">
-            <input type="text" class="form-control" placeholder="Pencarian...">
+        <form>
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <input type="text" name="search" class="form-control" placeholder="Pencarian..." value="{{ @$_GET['search'] }}">
+            </div>
+            <div class="col-md-3">
+              <select name="category" class="form-control">
+                <option value="">-Semua Kategori-</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ (@$_GET['category'] == $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-warning w-50">Cari</button>
+            </div>
           </div>
-          <div class="col-md-3">
-            <select name="category" class="form-control">
-              <option value="">-Semua Kategori-</option>
-              @foreach ($categories as $category)
-                  <option value="{{ $category->id }}">{{ $category->name }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="col-md-3">
-            <button class="btn btn-warning w-50">Cari</button>
-          </div>
-        </div>
+        </form>
         <div class="table-responsive">
           <table class="table table-striped table-bordered">
             <thead>
@@ -55,7 +57,7 @@
                       <input type="checkbox" {{ ($book->published) ? 'checked' : '' }}>
                     </td>
                     <td>
-                      <form action="{{ route('books.delete', $book->id) }}" class="d-inline" method="POST">
+                      <form action="{{ route('books.destroy', $book->id) }}" class="d-inline" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
@@ -64,11 +66,14 @@
                     </td>
                   </tr>
               @empty
-                  
+                <tr>
+                  <td colspan="8" align="center">-tidak ada data-</td>
+                </tr>
               @endforelse
             </tbody>
           </table>
         </div>
+        {{ $books->links() }}
       </div>
     </div>
   </div>
