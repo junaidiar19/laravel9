@@ -1,6 +1,20 @@
 @extends('layouts.app')
 @section('content')
 
+@push('after-styles')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/datatables.min.css') }}">
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+@endpush
+
+@push('after-scripts')
+  <script src="{{ asset('assets/plugins/datatables/datatables.min.js') }}"></script>
+  <script>
+    $(document).ready( function () {
+      $('#myTable').DataTable();
+    });
+  </script>
+@endpush
+
 <div class="row justify-content-center">
   <div class="col-md-12">
     <div class="card">
@@ -73,7 +87,7 @@
             </tbody>
           </table>
         </div>
-        {{ $books->links() }}
+        {{ $books->withQueryString()->links() }}
       </div>
     </div>
   </div>

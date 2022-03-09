@@ -19,7 +19,7 @@ class BooksController extends Controller
         $params = $request->except('_token');
         // dd($params);
 
-        $books = Book::filter($params)->latest()->paginate(3);
+        $books = Book::filter($params)->latest()->paginate(2);
 
         $categories = Category::all();
 
