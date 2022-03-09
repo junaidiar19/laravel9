@@ -19,9 +19,17 @@ class Book extends Model
     // Scope for Filtering
     public function scopeFilter($query, $params)
     {
-        if(@$params['search']) {
-            $query->where('title', 'LIKE', "%{$params['search']}%");
-        }
+        // if(@$params['search']) {
+        //     $query->where('title', 'LIKE', "%{$params['search']}%")
+        //         ->orWhere('kode', 'LIKE', "%{$params['search']}%");
+        // }
+
+        $query->where(function($query) use ($params) {
+            if(@$params['search']) {
+                $query->where('title', 'LIKE', "%{$params['search']}%")
+                    ->orWhere('kode', 'LIKE', "%{$params['search']}%");
+            }
+        });
 
         if(@$params['category']) {
             $query->where('category_id', $params['category']);
