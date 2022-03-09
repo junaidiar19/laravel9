@@ -19,14 +19,7 @@ class BooksController extends Controller
         $params = $request->except('_token');
         // dd($params);
 
-        $query = Book::query();
-
-        if(count($params) > 0) {
-            $query->where('title', 'LIKE', "%{$params['search']}%")
-                ->where('category_id', $params['category']);
-        }
-        
-        $books = $query->latest()->paginate(3);
+        $books = Book::filter($params)->latest()->paginate(3);
 
         $categories = Category::all();
 

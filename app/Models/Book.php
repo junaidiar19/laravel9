@@ -16,6 +16,18 @@ class Book extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // Scope for Filtering
+    public function scopeFilter($query, $params)
+    {
+        if(@$params['search']) {
+            $query->where('title', 'LIKE', "%{$params['search']}%");
+        }
+
+        if(@$params['category']) {
+            $query->where('category_id', $params['category']);
+        }
+    }
+
     // Defining an Accessor
     public function getGetPriceAttribute()
     {
