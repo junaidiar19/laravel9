@@ -56,4 +56,17 @@ class User extends Authenticatable
     public function scopeIsUser($query) {
         return $query->whereRole('user');
     }
+
+    public function roleAdmin() {
+        return $this->role === 'admin';
+    }
+
+    public function roleUser() {
+        return $this->role === 'user';
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
 }
