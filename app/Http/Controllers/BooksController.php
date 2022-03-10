@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\UploadImage;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -59,8 +60,9 @@ class BooksController extends Controller
         // upload to storage cover
         $file = $request->file('cover');
         // $attr['cover'] = $file->store('cover'); // store by default
-        $filename = str()->slug($request->title . '-' . str()->random(5)) . '.' . $file->getClientOriginalExtension();
-        $attr['cover'] = $file->storeAs('buku', $filename); // store with custom filename and path
+        $filename = str()->slug($request->title . '-' . str()->random(5));
+        $upload = UploadImage::upload($file, 'buku', $filename);
+        $attr['cover'] = $upload;
 
         // Create a new book...
         Book::create($attr);
@@ -115,16 +117,9 @@ class BooksController extends Controller
 
             // upload to storage cover
             $file = $request->file('cover');
-            // $attr['cover'] = $file->store('cover'); // store by default
-            $filename = str()->slug($request->title . '-' . str()->random(5)) . '.' . $file->getClientOriginalExtension();
-            $attr['cover'] = $file->storeAs('buku', $filename); // store with custom filename and path
-
-            // resize cover to 800px
-            // $img = Image::make("storage/" . $filename);
-            // $img->resize(800, null, function ($constraint) {
-            //     $constraint->aspectRatio();
-            // });
-            // $img->save();
+            $filename = str()->slug($request->title . '-' . str()->random(5));
+            $upload = UploadImage::upload($file, 'buku', $filename);
+            $attr['cover'] = $upload;
 
             // delete old cover
             $old_cover = $book->cover;
