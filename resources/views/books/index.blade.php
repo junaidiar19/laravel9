@@ -54,6 +54,7 @@
                 <th>Jumlah</th>
                 <th>Harga</th>
                 <th>Kategori</th>
+                <th>Cover</th>
                 <th>Publish</th>
                 <th>Aksi</th>
               </tr>
@@ -67,6 +68,9 @@
                     <td>{{ $book->qty }}</td>
                     <td>{{ $book->getPrice }}</td>
                     <td>{{ $book->category->name }}</td>
+                    <td>
+                      <img src="{{ $book->getCover }}" class="rounded" height="100" alt="cover buku">
+                    </td>
                     <td>
                       <input type="checkbox" {{ ($book->published) ? 'checked' : '' }}>
                     </td>

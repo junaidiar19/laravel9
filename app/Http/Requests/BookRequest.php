@@ -34,7 +34,6 @@ class BookRequest extends FormRequest
             'title' => 'required',
             'qty' => 'required|numeric',
             'price' => 'required|numeric',
-            // 'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required|numeric',
             'published' => 'boolean',
         ];

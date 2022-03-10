@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class BooksController extends Controller
 {
@@ -19,7 +21,7 @@ class BooksController extends Controller
         $params = $request->except('_token');
         // dd($params);
 
-        $books = Book::filter($params)->latest()->paginate(2);
+        $books = Book::filter($params)->latest()->paginate(5);
 
         $categories = Category::all();
 
@@ -46,8 +48,21 @@ class BooksController extends Controller
      */
     public function store(BookRequest $request)
     {
-        // Create a new book...
+        // get all data from request
         $attr = $request->all();
+
+        // validation for image/cover
+        $request->validate([
+            'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]);
+
+        // upload to storage cover
+        $file = $request->file('cover');
+        // $attr['cover'] = $file->store('cover'); // store by default
+        $filename = str()->slug($request->title . '-' . str()->random(5)) . '.' . $file->getClientOriginalExtension();
+        $attr['cover'] = $file->storeAs('buku', $filename); // store with custom filename and path
+
+        // Create a new book...
         Book::create($attr);
 
         // Redirect to the book's show page...
@@ -88,8 +103,38 @@ class BooksController extends Controller
      */
     public function update(BookRequest $request, Book $book)
     {
+
+        // get all data from request
+        $attr = $request->all();
+
+        if ($request->hasFile('cover')) {
+            // validation for image/cover
+            $request->validate([
+                'cover' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            ]);
+
+            // upload to storage cover
+            $file = $request->file('cover');
+            // $attr['cover'] = $file->store('cover'); // store by default
+            $filename = str()->slug($request->title . '-' . str()->random(5)) . '.' . $file->getClientOriginalExtension();
+            $attr['cover'] = $file->storeAs('buku', $filename); // store with custom filename and path
+
+            // resize cover to 800px
+            // $img = Image::make("storage/" . $filename);
+            // $img->resize(800, null, function ($constraint) {
+            //     $constraint->aspectRatio();
+            // });
+            // $img->save();
+
+            // delete old cover
+            $old_cover = $book->cover;
+            if($old_cover) {
+                Storage::delete($old_cover);
+            }
+        }
+
         // Update the book...
-        $book->update($request->all());
+        $book->update($attr);
 
         // Redirect to the book's show page...
         session()->flash('success', 'Book has been updated');
@@ -104,7 +149,15 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        Book::destroy($id);
+        $book = Book::findOrFail($id);
+
+        // delete old cover
+        $old_cover = $book->cover;
+        if($old_cover) {
+            Storage::delete($old_cover);
+        }
+        // delete book
+        $book->delete();
 
         session()->flash('success', 'Book has been deleted');
         return redirect()->back();

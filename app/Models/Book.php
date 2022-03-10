@@ -42,4 +42,9 @@ class Book extends Model
         $price = $this->attributes['price'];
         return ($price > 0) ? 'Rp. ' . number_format($price) : 'Free';
     }
+
+    public function getGetCoverAttribute()
+    {
+        return ($this->attributes['cover']) ? asset('storage/' . $this->attributes['cover']) : asset('images/default.jpg');
+    }
 }

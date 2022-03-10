@@ -10,7 +10,7 @@
       </div>
       <div class="card-body">
         <x-alert />
-        <form action="{{ route('books.store') }}" method="POST">
+        <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
           @include('books._form')
         </form>

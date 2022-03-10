@@ -10,7 +10,7 @@
       </div>
       <div class="card-body">
         <x-alert />
-        <form action="{{ route('books.update', $book->id) }}" method="POST">
+        <form action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
           @include('books._form')

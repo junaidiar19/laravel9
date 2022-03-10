@@ -51,6 +51,15 @@
     </div>
   @enderror
 </div>
+<div class="form-group">
+  <label for="">Upload Cover</label>
+  <input type="file" name="cover">
+  @error('cover')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+  @enderror
+</div>
 <div class="d-flex align-items-center mb-3">
   <input type="checkbox" name="published" id="published" class="me-2" value="0" {{ (old('published', @$book->published) == 1) ? 'checked' : '' }}>
   <label for="published">Published</label>
