@@ -21,10 +21,12 @@ use App\Http\Controllers\UserController;
 */
 
 // Route Auth
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('login.authenticate');
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/registration', [AuthController::class, 'registration'])->name('registration');
+Route::middleware('guest')->group(function() {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('login.authenticate');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/registration', [AuthController::class, 'registration'])->name('registration');
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
