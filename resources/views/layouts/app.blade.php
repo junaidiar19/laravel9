@@ -18,6 +18,8 @@
     
     @include('includes.footer')
 
+    @stack('modal-section')
+
     @stack('before-scripts')
     @include('includes.scripts')
     @stack('after-scripts')

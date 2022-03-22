@@ -8,6 +8,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ (request()->routeIs('home')) ? 'active' : '' }}" href="{{ route('home') }}">Home <span class="visually-hidden">(current)</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->routeIs('categories.index')) ? 'active' : '' }}" href="{{ route('categories.index') }}">Category</a>
+                </li>
                 @if (Auth::check())
 
                     @if (Auth::user()->roleUser())
